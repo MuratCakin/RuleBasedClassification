@@ -48,7 +48,10 @@ agg_df = df.groupby(by=["COUNTRY","SOURCE","SEX","AGE"]).\
 agg_df.reset_index(inplace=True)
 
 # Transform numeric variable to categorical variable
-agg_df["AGE_CAT"] = pd.cut(agg_df["AGE"], [0, 19, 24, 31, 41, 70])
+bins = [0, 18, 23, 30, 40, agg_df["AGE"].max()]
+mylabels = ['0_18', '19_23', '24_30', '31_40', '41_' + str(agg_df["AGE"].max())]
+agg_df["age_cat"] = pd.cut(agg_df["AGE"], bins, labels=mylabels)
+
 
 agg_df["customer_level_based"] = [row[0].upper() + "_" +
                                   row[1].upper() + "_" +
