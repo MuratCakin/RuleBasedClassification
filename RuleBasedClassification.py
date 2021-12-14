@@ -1,8 +1,5 @@
-# Loading Libraries
 import numpy as np
 import pandas as pd
-import seaborn as sns
-from matplotlib import pyplot as plt
 
 
 # Reading .csv file
@@ -60,16 +57,14 @@ agg_df["customer_level_based"] = [row[0].upper() + "_" +
                                   for row in agg_df.values]
 
 # New DataFrame's structure (Index = customer_level_based, dependent variable = PRICE)
-drop_list = [col for col in agg_df.columns if col not in ["customer_level_based","PRICE"]]
-agg_df.drop(drop_list, axis=1, inplace=True)
+agg_df = agg_df[["customer_level_based", "PRICE"]]
 agg_df = agg_df[["customer_level_based","PRICE"]].groupby(["customer_level_based"]).agg("mean")
 
 
 # Prıce segments
 agg_df["SEGMENT"] = pd.qcut(agg_df["PRICE"], 4, labels=["D","C","B","A"])
-agg_list = ["mean","max","sum"]
-agg_df[["PRICE","SEGMENT"]].groupby("SEGMENT").agg(agg_list)
-c_segment_df = pd.DataFrame([row for row in agg_df.values if str(row[1]) == "C"])
+agg_df.groupby("SEGMENT").agg({"PRICE": "mean"})
+agg_df = agg_df.reset_index()
 
 # Predictions
 new_user = "TUR_ANDROID_FEMALE_31_40"
