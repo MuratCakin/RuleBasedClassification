@@ -68,9 +68,7 @@ agg_df["SEGMENT"] = pd.qcut(agg_df["PRICE"], 4, labels=["D","C","B","A"])
 agg_df.groupby("SEGMENT").agg({"PRICE": "mean"})
 agg_df = agg_df.reset_index()
 
-# Predictions
+# Prediction
 new_user = "TUR_ANDROID_FEMALE_31_40"
-agg_df[agg_df["customer_level_based"] == new_user]
-new_user = "FR_IOS_FEMALE_31_40"
 agg_df[agg_df["customer_level_based"] == new_user]
 
