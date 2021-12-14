@@ -34,17 +34,17 @@ def check_df(dataframe):
 check_df(df)
 
 # In COUNTRY, SOURCE, SEX, AGE breakdown average earnings
-df[["PRICE","COUNTRY","SOURCE","SEX","AGE"]].groupby(["COUNTRY","SOURCE","SEX","AGE"]).agg("mean")
+df.groupby(by=["COUNTRY", 'SOURCE', "SEX", "AGE"]).agg({"PRICE": "mean"})
 
 
 # Sort the output by PRICE
-agg_df = df[["PRICE","COUNTRY","SOURCE","SEX","AGE"]].\
-            groupby(["COUNTRY","SOURCE","SEX","AGE"]).\
-            agg("mean").\
+agg_df = df.groupby(by=["COUNTRY","SOURCE","SEX","AGE"]).\
+            agg({"PRICE": "mean"}).\
             sort_values("PRICE",ascending=False)
 
 
-# Level based customers (COUNTRY_SOURCE_SEX_AGE_CAT)
+#### Level based customers (COUNTRY_SOURCE_SEX_AGE_CAT) ####
+
 agg_df.reset_index(inplace=True)
 
 # Transform numeric variable to categorical variable
