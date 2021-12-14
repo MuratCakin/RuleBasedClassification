@@ -73,7 +73,7 @@ c_segment_df = pd.DataFrame([row for row in agg_df.values if str(row[1]) == "C"]
 
 # Predictions
 new_user = "TUR_ANDROID_FEMALE_31_40"
-new_user = agg_df[agg_df["customer_level_based"] == new_user]
+agg_df[agg_df["customer_level_based"] == new_user]
 new_user = "FR_IOS_FEMALE_31_40"
-new_user = agg_df[agg_df["customer_level_based"] == new_user]
+agg_df[agg_df["customer_level_based"] == new_user]
 
