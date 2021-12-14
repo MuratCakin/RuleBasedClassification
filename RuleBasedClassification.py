@@ -53,10 +53,10 @@ agg_df.reset_index(inplace=True)
 # Transform numeric variable to categorical variable
 agg_df["AGE_CAT"] = pd.cut(agg_df["AGE"], [0, 19, 24, 31, 41, 70])
 
-agg_df["customer_level_based"] = [str(row[0]) + "_" +
-                                  str(row[1]) + "_" +
-                                  str(row[2]) + "_" +
-                                  str(row[5])
+agg_df["customer_level_based"] = [row[0].upper() + "_" +
+                                  row[1].upper() + "_" +
+                                  row[2].upper() + "_" +
+                                  str(row[5]).upper()
                                   for row in agg_df.values]
 
 # New DataFrame's structure (Index = customer_level_based, dependent variable = PRICE)
